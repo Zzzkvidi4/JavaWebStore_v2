@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/web_store</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">CaTaClYsM</property>
+
+        <!-- NOTE that after automapping with IDEA property username and password will delete -->
+        <!--and will be:  Initial SessionFactory failedorg.hibernate.service.spi.ServiceException: Unable to create requested service-->
+        <mapping class="com.zzzkvidi4.web_store.models.Country"/>
+        <mapping class="com.zzzkvidi4.web_store.models.OrderItem"/>
+        <mapping class="com.zzzkvidi4.web_store.models.Order"/>
+        <mapping class="com.zzzkvidi4.web_store.models.ProductParamValue"/>
+        <mapping class="com.zzzkvidi4.web_store.models.ProductTypeParam"/>
+        <mapping class="com.zzzkvidi4.web_store.models.ProductType"/>
+        <mapping class="com.zzzkvidi4.web_store.models.Product"/>
+        <mapping class="com.zzzkvidi4.web_store.models.Role"/>
+        <mapping class="com.zzzkvidi4.web_store.models.Status"/>
+        <mapping class="com.zzzkvidi4.web_store.models.UserRole"/>
+        <mapping class="com.zzzkvidi4.web_store.models.User"/>
+        <!-- NOTE that after automapping with IDEA property username and password will delete -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>
