@@ -1,19 +1,36 @@
 package com.zzzkvidi4.web_store.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users", schema = "web_store")
 public class User {
-    private int userId;
-    private String name;
-    private String surname;
-    private String login;
-    private String email;
-    private String password;
-
     @Id
     @Column(name = "user_id")
+    @GeneratedValue
+    private int userId;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<UserRole> userRoles;
+
     public int getUserId() {
         return userId;
     }
@@ -22,8 +39,6 @@ public class User {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -32,8 +47,6 @@ public class User {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "surname")
     public String getSurname() {
         return surname;
     }
@@ -42,8 +55,6 @@ public class User {
         this.surname = surname;
     }
 
-    @Basic
-    @Column(name = "login")
     public String getLogin() {
         return login;
     }
@@ -52,8 +63,6 @@ public class User {
         this.login = login;
     }
 
-    @Basic
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -62,8 +71,6 @@ public class User {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
