@@ -3,6 +3,7 @@ package com.zzzkvidi4.web_store.models;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -29,7 +30,7 @@ public class User {
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    private Set<UserRole> userRoles;
+    private Set<UserRole> userRoles = new HashSet<>();
 
     public int getUserId() {
         return userId;

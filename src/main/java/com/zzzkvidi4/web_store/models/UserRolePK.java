@@ -4,12 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-public class UserRolePK implements Serializable {
+class UserRolePK implements Serializable {
+
+    @Id
+    @Column(name = "user_id")
     private int userId;
+
+    @Id
+    @Column(name = "role_id")
     private int roleId;
 
-    @Column(name = "user_id")
-    @Id
     public int getUserId() {
         return userId;
     }
@@ -18,8 +22,6 @@ public class UserRolePK implements Serializable {
         this.userId = userId;
     }
 
-    @Column(name = "role_id")
-    @Id
     public int getRoleId() {
         return roleId;
     }
