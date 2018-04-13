@@ -1,26 +1,35 @@
 package com.zzzkvidi4.web_store.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user_roles", schema = "web_store")
 @IdClass(UserRolePK.class)
+@JsonIgnoreType
 public class UserRole {
 
     @Id
     @Column(name = "role_id")
+    @JsonIgnore
     private int roleId;
 
     @Id
     @Column(name = "user_id")
+    @JsonIgnore
     private int userId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, updatable = false, insertable = false)
+    @JsonIgnore
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = "role_id", nullable = false, updatable = false, insertable = false)
+    @JsonUnwrapped
     private Role role;
 
     @Override

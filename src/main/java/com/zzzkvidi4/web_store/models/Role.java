@@ -17,7 +17,7 @@ public class Role {
     @Column(name = "display_name")
     private String displayName;
 
-    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "role")
     private Set<UserRole> userRoles = new HashSet<>();
 
     public int getRoleId() {
