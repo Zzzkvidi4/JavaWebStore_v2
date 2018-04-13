@@ -6,12 +6,29 @@ import javax.persistence.*;
 @Table(name = "product_param_values", schema = "web_store")
 @IdClass(ProductParamValuePK.class)
 public class ProductParamValue {
-    private int productId;
-    private int productTypeParamId;
-    private String value;
-
     @Id
     @Column(name = "product_id")
+    private int productId;
+
+    @Id
+    @Column(name = "product_type_param_id")
+    private int productTypeParamId;
+
+    @Column(name = "value")
+    private String value;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false, updatable = false, insertable = false)
+    private Product product;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public int getProductId() {
         return productId;
     }
@@ -20,8 +37,6 @@ public class ProductParamValue {
         this.productId = productId;
     }
 
-    @Id
-    @Column(name = "product_type_param_id")
     public int getProductTypeParamId() {
         return productTypeParamId;
     }
@@ -30,8 +45,6 @@ public class ProductParamValue {
         this.productTypeParamId = productTypeParamId;
     }
 
-    @Basic
-    @Column(name = "value")
     public String getValue() {
         return value;
     }

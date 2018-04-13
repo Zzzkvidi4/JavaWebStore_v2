@@ -5,11 +5,27 @@ import javax.persistence.*;
 @Entity
 @Table(name = "order_items", schema = "web_store")
 public class OrderItem {
-    private int orderItemId;
-    private int count;
-
     @Id
     @Column(name = "order_item_id")
+    private int orderItemId;
+
+    @Column(name = "count")
+    private int count;
+
+    @Column(name = "product_id")
+    private int productId;
+
+    @Column(name = "order_id")
+    private int orderId;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false, updatable = false, insertable = false)
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false, updatable = false, insertable = false)
+    private Order order;
+
     public int getOrderItemId() {
         return orderItemId;
     }
@@ -18,8 +34,6 @@ public class OrderItem {
         this.orderItemId = orderItemId;
     }
 
-    @Basic
-    @Column(name = "count")
     public int getCount() {
         return count;
     }

@@ -29,7 +29,7 @@ CREATE TABLE product_type_params(
     comment varchar(50),
     is_optional boolean not null,
     index product_type_index (product_type_id),
-    constraint product_type_fk foreign key (product_type_id) references product_types(product_type_id)
+    constraint ptp_product_type_fk foreign key (product_type_id) references product_types(product_type_id)
 );
 
 CREATE TABLE product_param_values(
@@ -38,9 +38,9 @@ CREATE TABLE product_param_values(
     value varchar(45) not null,
     constraint param_values_pk primary key (product_id, product_type_param_id),
     index product_index (product_id),
-    index product_index (product_type_param_id),
-    constraint product_fk foreign key (product_id) references products(product_id),
-    constraint product_type_param_fk foreign key (product_type_param_id) references product_type_params(product_type_param_id)
+    index product_type_param_index (product_type_param_id),
+    constraint ppv_product_fk foreign key (product_id) references products(product_id),
+    constraint ppv_product_type_param_fk foreign key (product_type_param_id) references product_type_params(product_type_param_id)
 );
 
 CREATE TABLE statuses(
@@ -57,8 +57,8 @@ CREATE TABLE orders(
     price decimal not null,
     index status_index (status_id),
     index user_index (user_id),
-    constraint status_fk foreign key (status_id) references statuses(status_id),
-    constraint user_fk foreign key (user_id) references users(user_id)
+    constraint o_status_fk foreign key (status_id) references statuses(status_id),
+    constraint o_user_fk foreign key (user_id) references users(user_id)
 );
 
 CREATE TABLE order_items(
@@ -68,7 +68,7 @@ CREATE TABLE order_items(
     count int not null,
     index product_index (product_id),
     index order_index (order_id),
-    constraint order_product_un unique (product_id, order_id),
-    constraint order_fk foreign key (order_id) references orders(order_id),
-    constraint product_fk foreign key (product_id) references products(product_id)
+    constraint oi_order_product_un unique (product_id, order_id),
+    constraint oi_order_fk foreign key (order_id) references orders(order_id),
+    constraint oi_product_fk foreign key (product_id) references products(product_id)
 );

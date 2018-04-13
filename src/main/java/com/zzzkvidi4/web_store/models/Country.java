@@ -1,15 +1,22 @@
 package com.zzzkvidi4.web_store.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "countries", schema = "web_store")
 public class Country {
-    private int countryId;
-    private String name;
-
     @Id
     @Column(name = "country_id")
+    private int countryId;
+
+    @Column(name = "name")
+    private String name;
+
+    @OneToMany(mappedBy = "country")
+    private Set<Product> products = new HashSet<>();
+
     public int getCountryId() {
         return countryId;
     }
@@ -18,8 +25,6 @@ public class Country {
         this.countryId = countryId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -44,5 +49,13 @@ public class Country {
         int result = countryId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }

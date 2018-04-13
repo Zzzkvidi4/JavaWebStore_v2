@@ -5,11 +5,15 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 public class ProductParamValuePK implements Serializable {
+
+    @Id
+    @Column(name = "product_id")
     private int productId;
+
+    @Id
+    @Column(name = "product_type_param_id")
     private int productTypeParamId;
 
-    @Column(name = "product_id")
-    @Id
     public int getProductId() {
         return productId;
     }
@@ -18,8 +22,6 @@ public class ProductParamValuePK implements Serializable {
         this.productId = productId;
     }
 
-    @Column(name = "product_type_param_id")
-    @Id
     public int getProductTypeParamId() {
         return productTypeParamId;
     }

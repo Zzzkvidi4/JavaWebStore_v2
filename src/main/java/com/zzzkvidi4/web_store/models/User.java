@@ -32,6 +32,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<UserRole> userRoles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders = new HashSet<>();
+
     public Set<UserRole> getUserRoles() {
         return userRoles;
     }

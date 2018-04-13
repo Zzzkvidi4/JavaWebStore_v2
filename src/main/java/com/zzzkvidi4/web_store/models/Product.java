@@ -1,19 +1,36 @@
 package com.zzzkvidi4.web_store.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products", schema = "web_store")
 public class Product {
-    private int productId;
-    private String name;
-    private int count;
-    private int price;
-    private ProductType productTypesByProductTypeId;
-    private Country countriesByCountryId;
-
     @Id
     @Column(name = "product_id")
+    private int productId;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "count")
+    private int count;
+
+    @Column(name = "price")
+    private int price;
+
+    @ManyToOne
+    @JoinColumn(name = "product_type_id", nullable = false, insertable = false, updatable = false)
+    private ProductType productType;
+
+    @ManyToOne
+    @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
+    private Country country;
+
+    @OneToMany(mappedBy = "product")
+    private Set<ProductParamValue> params = new HashSet<>();
+
     public int getProductId() {
         return productId;
     }
@@ -22,8 +39,6 @@ public class Product {
         this.productId = productId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -32,8 +47,6 @@ public class Product {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "count")
     public int getCount() {
         return count;
     }
@@ -42,8 +55,6 @@ public class Product {
         this.count = count;
     }
 
-    @Basic
-    @Column(name = "price")
     public int getPrice() {
         return price;
     }
@@ -74,23 +85,19 @@ public class Product {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "product_type_id", referencedColumnName = "product_type_id", nullable = false)
-    public ProductType getProductTypesByProductTypeId() {
-        return productTypesByProductTypeId;
+    public ProductType getProductType() {
+        return productType;
     }
 
-    public void setProductTypesByProductTypeId(ProductType productTypesByProductTypeId) {
-        this.productTypesByProductTypeId = productTypesByProductTypeId;
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "country_id", referencedColumnName = "country_id", nullable = false)
-    public Country getCountriesByCountryId() {
-        return countriesByCountryId;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setCountriesByCountryId(Country countriesByCountryId) {
-        this.countriesByCountryId = countriesByCountryId;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }
