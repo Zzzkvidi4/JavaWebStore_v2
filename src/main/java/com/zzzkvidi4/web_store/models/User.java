@@ -1,7 +1,5 @@
 package com.zzzkvidi4.web_store.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +9,7 @@ import java.util.Set;
 public class User {
     @Id
     @Column(name = "user_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
     @Column(name = "name")
@@ -20,16 +18,16 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "login")
+    @Column(name = "login", unique = true)
     private String login;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.REMOVE}, mappedBy = "user")
     private Set<UserRole> userRoles = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
