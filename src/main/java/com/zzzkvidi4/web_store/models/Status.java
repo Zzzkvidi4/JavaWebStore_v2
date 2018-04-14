@@ -5,12 +5,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "statuses", schema = "web_store")
 public class Status {
-    private int statusId;
-    private String name;
-    private String displayName;
-
     @Id
     @Column(name = "status_id")
+    private int statusId;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "display_name")
+    private String displayName;
+
     public int getStatusId() {
         return statusId;
     }
@@ -19,8 +23,6 @@ public class Status {
         this.statusId = statusId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -29,8 +31,6 @@ public class Status {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "display_name")
     public String getDisplayName() {
         return displayName;
     }

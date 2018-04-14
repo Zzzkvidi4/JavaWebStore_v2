@@ -1,15 +1,33 @@
 package com.zzzkvidi4.web_store.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "product_types", schema = "web_store")
 public class ProductType {
-    private int productTypeId;
-    private String name;
-
     @Id
     @Column(name = "product_type_id")
+    private int productTypeId;
+
+    @Column(name = "name")
+    private String name;
+
+    @OneToMany(mappedBy = "productType")
+    private Set<Product> products = new HashSet<>();
+
+    @OneToMany(mappedBy = "")
+    private Set<ProductTypeParam> paramTypes = new HashSet<>();
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public Set<ProductTypeParam> getParamTypes() {
+        return paramTypes;
+    }
+
     public int getProductTypeId() {
         return productTypeId;
     }
@@ -18,8 +36,6 @@ public class ProductType {
         this.productTypeId = productTypeId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }

@@ -4,8 +4,8 @@ import com.zzzkvidi4.web_store.models.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
+
 
 @Service("userDetailsService")
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
@@ -21,7 +21,8 @@ public class UserDetailsService implements org.springframework.security.core.use
         org.springframework.security.core.userdetails.User.UserBuilder builder = org.springframework.security.core.userdetails.User.builder();
         builder.username(user.getLogin());
         builder.password(user.getPassword());
-        builder.roles("USER");
+        String[] rolesArray = user.getUserRoles().stream().map(role -> role.getRole().getName()).toArray(String[]::new);
+        builder.roles(rolesArray);
         return builder.build();
     }
 }

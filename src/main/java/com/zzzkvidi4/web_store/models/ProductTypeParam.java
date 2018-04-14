@@ -5,14 +5,37 @@ import javax.persistence.*;
 @Entity
 @Table(name = "product_type_params", schema = "web_store")
 public class ProductTypeParam {
-    private int productTypeParamId;
-    private String name;
-    private String type;
-    private String comment;
-    private byte isOptional;
-
     @Id
     @Column(name = "product_type_param_id")
+    private int productTypeParamId;
+
+    @Column(name = "product_type_id")
+    private int productTypeId;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "comment")
+    private String comment;
+
+    @Column(name = "is_optional")
+    private byte isOptional;
+
+    @ManyToOne
+    @JoinColumn(name = "product_type_id", nullable = false, updatable = false, insertable = false)
+    private ProductType productType;
+
+    public int getProductTypeId() {
+        return productTypeId;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
     public int getProductTypeParamId() {
         return productTypeParamId;
     }
@@ -21,8 +44,6 @@ public class ProductTypeParam {
         this.productTypeParamId = productTypeParamId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -31,8 +52,6 @@ public class ProductTypeParam {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "type")
     public String getType() {
         return type;
     }
@@ -41,8 +60,6 @@ public class ProductTypeParam {
         this.type = type;
     }
 
-    @Basic
-    @Column(name = "comment")
     public String getComment() {
         return comment;
     }
@@ -51,8 +68,6 @@ public class ProductTypeParam {
         this.comment = comment;
     }
 
-    @Basic
-    @Column(name = "is_optional")
     public byte getIsOptional() {
         return isOptional;
     }

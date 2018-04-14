@@ -1,16 +1,25 @@
 package com.zzzkvidi4.web_store.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles", schema = "web_store")
 public class Role {
-    private int roleId;
-    private String name;
-    private String displayName;
-
     @Id
     @Column(name = "role_id")
+    private int roleId;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "display_name")
+    private String displayName;
+
+    @OneToMany(mappedBy = "role")
+    private Set<UserRole> userRoles = new HashSet<>();
+
     public int getRoleId() {
         return roleId;
     }
@@ -19,8 +28,6 @@ public class Role {
         this.roleId = roleId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -29,8 +36,6 @@ public class Role {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "display_name")
     public String getDisplayName() {
         return displayName;
     }
