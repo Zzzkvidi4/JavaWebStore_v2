@@ -1,7 +1,9 @@
 package com.zzzkvidi4.web_store.services;
 
 import com.zzzkvidi4.web_store.DBHelper;
+import com.zzzkvidi4.web_store.models.Role;
 import com.zzzkvidi4.web_store.models.User;
+import com.zzzkvidi4.web_store.models.UserRole;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -60,6 +62,11 @@ public class HibernateUserService implements UserService {
         Session session = DBHelper.getSession();
         Transaction transaction = session.beginTransaction();
         session.save(user);
+        Role role = session.createQuery("from Role role where role.name like '%USER%'", Role.class).getSingleResult();
+        UserRole userRole = new UserRole();
+        userRole.setUserId(user.getUserId());
+        userRole.setRoleId(role.getRoleId());
+        session.save(userRole);
         transaction.commit();
         session.close();
     }
