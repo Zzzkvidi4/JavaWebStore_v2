@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Service("userService")
@@ -58,26 +59,54 @@ public class HibernateUserService implements UserService {
     }
 
     @Override
-    public void createUser(User user) {
-        Session session = DBHelper.getSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(user);
-        Role role = session.createQuery("from Role role where role.name like '%USER%'", Role.class).getSingleResult();
-        UserRole userRole = new UserRole();
-        userRole.setUserId(user.getUserId());
-        userRole.setRoleId(role.getRoleId());
-        session.save(userRole);
-        transaction.commit();
-        session.close();
+    public List<String> createUser(User user) {
+        List<String> errors = new LinkedList<>();
+        Transaction transaction = null;
+        try (Session session = DBHelper.getSession()) {
+            try {
+                transaction = session.beginTransaction();
+                session.save(user);
+                Role role = session.createQuery("from Role role where role.name like '%USER%'", Role.class).getSingleResult();
+                UserRole userRole = new UserRole();
+                userRole.setUserId(user.getUserId());
+                userRole.setRoleId(role.getRoleId());
+                session.save(userRole);
+                transaction.commit();
+            }
+            catch (Throwable e) {
+                Throwable cur = e;
+                while (cur != null) {
+                    errors.add(cur.getMessage());
+                }
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+            }
+            return errors;
+        }
     }
 
     @Override
-    public void updateUser(User user) {
-        Session session = DBHelper.getSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(user);
-        transaction.commit();
-        session.close();
+    public List<String> updateUser(User user) {
+        List<String> errors = new LinkedList<>();
+        Transaction transaction = null;
+        try (Session session = DBHelper.getSession()) {
+            try {
+                transaction = session.beginTransaction();
+                session.update(user);
+                transaction.commit();
+            }
+            catch (Throwable e) {
+                Throwable cur = e;
+                while (cur != null) {
+                    errors.add(e.getMessage());
+                }
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+            }
+            return errors;
+        }
     }
 
     @Override
