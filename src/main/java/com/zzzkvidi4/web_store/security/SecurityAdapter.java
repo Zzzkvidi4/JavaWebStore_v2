@@ -22,7 +22,7 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/greeting/**", "/register/**").permitAll();
+        http.authorizeRequests().antMatchers("/greeting/**", "/register/**", "/product_types/**").permitAll();
         http.authorizeRequests().antMatchers("/users/**").hasAnyRole("USER");
         http.exceptionHandling().authenticationEntryPoint(new RESTAuthenticationEntryPoint());
         http.formLogin().successHandler(new RESTAuthenticationSuccessHandler());
