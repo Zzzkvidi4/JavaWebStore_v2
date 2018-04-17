@@ -24,6 +24,6 @@ public class ProductTypeController {
 
     @RequestMapping(value = "/product_types/{productTypeId}/products")
     public JsonHttpResponse<List<Product>> getProducts(@PathVariable("productTypeId") int productTypeId){
-        return new JsonHttpResponse<>();
+        return new JsonHttpResponse<>(productTypeService.getProducts(productTypeId), true);
     }
 }
