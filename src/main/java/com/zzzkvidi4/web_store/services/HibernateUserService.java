@@ -77,6 +77,7 @@ public class HibernateUserService implements UserService {
                 Throwable cur = e;
                 while (cur != null) {
                     errors.add(cur.getMessage());
+                    cur = cur.getCause();
                 }
                 if (transaction != null) {
                     transaction.rollback();
@@ -100,6 +101,7 @@ public class HibernateUserService implements UserService {
                 Throwable cur = e;
                 while (cur != null) {
                     errors.add(e.getMessage());
+                    cur = cur.getCause();
                 }
                 if (transaction != null) {
                     transaction.rollback();

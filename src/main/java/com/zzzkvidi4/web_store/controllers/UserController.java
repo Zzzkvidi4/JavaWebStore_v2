@@ -24,12 +24,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public JsonHttpResponse<Void> createUser(@RequestBody User user){
         JsonHttpResponse<Void> response = new JsonHttpResponse<>();
-        try {
-            userService.createUser(user);
-        }
-        catch(Throwable e) {
-            response.addErrors(e);
-        }
+        response.addErrors(userService.createUser(user));
         return response;
     }
 
@@ -48,12 +43,8 @@ public class UserController {
     public JsonHttpResponse<Void> updateUser(@PathVariable("id") int id, @RequestBody User user){
         JsonHttpResponse<Void> response = new JsonHttpResponse<>();
         if (checkAuthentication(response, id)) {
-            try {
-                user.setUserId(id);
-                userService.updateUser(user);
-            } catch (Throwable e) {
-                response.addErrors(e);
-            }
+            user.setUserId(id);
+            response.addErrors(userService.updateUser(user));
         }
         return response;
     }
@@ -62,12 +53,7 @@ public class UserController {
     public JsonHttpResponse<Void> deleteUser(@PathVariable("id") int id){
         JsonHttpResponse<Void> response = new JsonHttpResponse<>();
         if (checkAuthentication(response, id)) {
-            try {
-                userService.deleteUser(id);
-            }
-            catch(Throwable e){
-                response.addErrors(e);
-            }
+            userService.deleteUser(id);
         }
         return response;
     }

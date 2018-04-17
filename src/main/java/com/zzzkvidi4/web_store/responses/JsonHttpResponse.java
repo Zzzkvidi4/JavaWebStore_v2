@@ -57,4 +57,8 @@ public class JsonHttpResponse<T> {
             cur = cur.getCause();
         }
     }
+
+    public void addErrors(List<String> errors){
+        this.errors.addAll(errors);
+    }
 }
