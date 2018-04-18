@@ -38,6 +38,26 @@ public class OrderItem {
         return count;
     }
 
+    public int getProductId() {
+        return productId;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
     public void setCount(int count) {
         this.count = count;
     }
