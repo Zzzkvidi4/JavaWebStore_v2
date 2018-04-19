@@ -59,6 +59,7 @@ public class JsonHttpResponse<T> {
     }
 
     public void addErrors(List<String> errors){
+        this.isSuccessful = errors.size() == 0;
         this.errors.addAll(errors);
     }
 }
