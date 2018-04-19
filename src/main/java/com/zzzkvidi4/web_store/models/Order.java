@@ -20,12 +20,19 @@ public class Order {
     @Column(name = "user_id")
     private int userId;
 
+    @Column(name = "status_id")
+    private int statusId;
+
     @OneToMany(mappedBy = "order")
     private Set<OrderItem> items;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false, insertable = false, updatable = false)
+    private Status status;
 
     public int getOrderId() {
         return orderId;
@@ -49,6 +56,30 @@ public class Order {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<OrderItem> items) {
+        this.items = items;
     }
 
     @Override
