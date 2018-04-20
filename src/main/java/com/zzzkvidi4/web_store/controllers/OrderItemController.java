@@ -5,10 +5,7 @@ import com.zzzkvidi4.web_store.responses.JsonHttpResponse;
 import com.zzzkvidi4.web_store.services.OrderItemService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -22,6 +19,14 @@ public class OrderItemController {
         JsonHttpResponse<Void> response = new JsonHttpResponse<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         response.addErrors(orderItemService.createOrderItem(item, auth.getName()));
+        return response;
+    }
+
+    @RequestMapping(value = "/order_item/{id}", method = RequestMethod.DELETE)
+    public JsonHttpResponse<Void> deleteOrderItem(@PathVariable("id") int id){
+        JsonHttpResponse<Void> response = new JsonHttpResponse<>();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        response.addErrors(orderItemService.deleteOrderItem(id, auth.getName()));
         return response;
     }
 }
