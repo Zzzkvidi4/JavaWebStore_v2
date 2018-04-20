@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OrderItemService {
     List<String> createOrderItem(OrderItem item, String username);
+
+    List<String> deleteOrderItem(int orderItemId, String username);
 }

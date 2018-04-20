@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.persistence.NoResultException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -40,6 +41,34 @@ public class HibernateOrderItemService implements OrderItemService {
 
             return errors;
         }
+    }
+
+    @Override
+    public List<String> deleteOrderItem(int orderItemId, String username) {
+        List<String> errors = new LinkedList<>();
+        try (Session session = DBHelper.getSession()){
+            Transaction transaction = session.beginTransaction();
+            try{
+                OrderItem item = session
+                        .createQuery("from OrderItem where orderItemId = :id and order.status.name like '%OPENED%' and order.user.login = :username", OrderItem.class)
+                        .setParameter("id", orderItemId)
+                        .setParameter("username", username)
+                        .getSingleResult();
+                Order order = item.getOrder();
+                Product product = item.getProduct();
+                order.setPrice(order.getPrice() - item.getCount() * product.getPrice());
+                product.setCount(product.getCount() + item.getCount());
+                session.delete(item);
+                session.save(product);
+                session.save(order);
+                transaction.commit();
+            }
+            catch (NoResultException e) {
+                transaction.rollback();
+                errors.add("Not found order item with such id in current user!");
+            }
+        }
+        return errors;
     }
 
     private Order createOrder(Session session, String username){
