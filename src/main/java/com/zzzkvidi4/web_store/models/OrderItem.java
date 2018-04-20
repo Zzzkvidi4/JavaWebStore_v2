@@ -62,6 +62,10 @@ public class OrderItem {
         this.count = count;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
