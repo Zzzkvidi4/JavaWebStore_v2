@@ -1,6 +1,7 @@
 package com.zzzkvidi4.web_store.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "statuses", schema = "web_store")
@@ -14,6 +15,9 @@ public class Status {
 
     @Column(name = "display_name")
     private String displayName;
+
+    @OneToMany(mappedBy = "status")
+    private Set<Order> orders;
 
     public int getStatusId() {
         return statusId;
