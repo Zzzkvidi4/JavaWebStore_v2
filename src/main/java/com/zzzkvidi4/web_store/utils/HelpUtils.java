@@ -2,15 +2,13 @@ package com.zzzkvidi4.web_store.utils;
 
 import com.zzzkvidi4.web_store.models.User;
 import com.zzzkvidi4.web_store.responses.JsonHttpResponse;
+import com.zzzkvidi4.web_store.services.HibernateUserService;
 import com.zzzkvidi4.web_store.services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import javax.annotation.Resource;
-
 public class HelpUtils {
-    @Resource(name = "userService")
-    private static UserService userService;
+    private static UserService userService = new HibernateUserService();
 
     public static <T> boolean checkAuthentication(JsonHttpResponse<T> response, int id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
