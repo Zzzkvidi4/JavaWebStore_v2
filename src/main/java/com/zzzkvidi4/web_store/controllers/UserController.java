@@ -3,18 +3,19 @@ package com.zzzkvidi4.web_store.controllers;
 import com.zzzkvidi4.web_store.models.User;
 import com.zzzkvidi4.web_store.responses.JsonHttpResponse;
 import com.zzzkvidi4.web_store.services.UserService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+
+import static com.zzzkvidi4.web_store.utils.HelpUtils.checkAuthentication;
 
 @RestController
 public class UserController {
 
     @Resource(name = "userService")
     private UserService userService;
+
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public List<User> getUsers(){
@@ -56,14 +57,5 @@ public class UserController {
             userService.deleteUser(id);
         }
         return response;
-    }
-
-    private <T> boolean checkAuthentication(JsonHttpResponse<T> response, int id){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!userService.findUserById(id, false).getLogin().equals(auth.getName())) {
-            response.addError("You cant't effect on another user!");
-            return false;
-        }
-        return true;
     }
 }
