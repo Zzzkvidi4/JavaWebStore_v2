@@ -11,10 +11,4 @@ public class Application {
     public static void main(String... args){
         SpringApplication.run(Application.class, args);
     }
-
-    @Bean
-    public Jackson2ObjectMapperBuilder configureObjectMapper() {
-        return new Jackson2ObjectMapperBuilder()
-                .modulesToInstall(Hibernate4Module.class);
-    }
 }

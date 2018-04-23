@@ -25,7 +25,17 @@ public class HibernateUserService implements UserService {
         }
         transaction.commit();
         session.close();
-        return user;
+        if (isFull) {
+            return user;
+        } else {
+            User unproxied = new User();
+            unproxied.setUserId(user.getUserId());
+            unproxied.setName(user.getName());
+            unproxied.setSurname(user.getSurname());
+            unproxied.setLogin(user.getLogin());
+            unproxied.setEmail(user.getEmail());
+            return unproxied;
+        }
     }
 
     @Override
