@@ -13,6 +13,8 @@ import {RegistrationComponent} from './registration/registration.component';
 import {ProductTypeComponent} from './product-type/product-type.component';
 import {ProductComponent} from './product/product.component';
 import {ProductListComponent} from './product-list/product-list.component';
+import {ProductTypeService} from "./services/product-type-service/product-type.service";
+import {ProductTypeListComponent} from './product-type-list/product-type-list.component';
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import {ProductListComponent} from './product-list/product-list.component';
     RegistrationComponent,
     ProductTypeComponent,
     ProductComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductTypeListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,10 @@ import {ProductListComponent} from './product-list/product-list.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    ProductTypeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
