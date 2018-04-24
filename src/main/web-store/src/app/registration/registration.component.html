@@ -1,0 +1,48 @@
+<div id="registration-component">
+  <div>
+    <div class="input-component">
+      <label>Name:
+        <input type="text" required [(ngModel)]="user.name">
+        <span *ngIf="user.name.length == 0">*</span>
+      </label>
+    </div>
+
+    <div class="input-component">
+    <label>Surname:
+      <input type="text" required [(ngModel)]="user.surname">
+      <span *ngIf="user.surname.length == 0">*</span>
+    </label>
+    </div>
+
+    <div class="input-component">
+      <label>Login:
+        <input type="text" required [(ngModel)]="user.login">
+        <span *ngIf="user.login.length == 0">*</span>
+      </label>
+    </div>
+
+    <div class="input-component">
+      <label>Email:
+        <input type="text" required [(ngModel)]="user.email">
+        <span *ngIf="user.email.length == 0">*</span>
+      </label>
+    </div>
+
+    <div class="input-component">
+      <label>Password:
+        <input type="text" required [(ngModel)]="user.password">
+        <span *ngIf="user.password.length == 0">*</span>
+      </label>
+    </div>
+
+    <div class="input-component">
+      <label>Password confirmation:
+        <input type="text" required>
+      </label>
+    </div>
+
+    <div class="input-component">
+      <input type="button" (click)="register()" value="Register">
+    </div>
+  </div>
+</div>

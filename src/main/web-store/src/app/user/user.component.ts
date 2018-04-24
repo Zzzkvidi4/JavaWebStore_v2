@@ -10,7 +10,7 @@ import {User} from "../models/user";
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  user: User;
+  user: User = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +28,7 @@ export class UserComponent implements OnInit {
         if (resp.status != 200) {
           this.location.go("/login")
         } else {
-          this.user = resp.body;
+          this.user = resp.body.data;
         }
       }
     );
