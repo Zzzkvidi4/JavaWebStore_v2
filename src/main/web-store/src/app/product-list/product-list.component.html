@@ -1,3 +1,7 @@
-<p>
-  product-list works!
-</p>
+<div id="product-list-component">
+  <nav>
+    <div *ngFor="let product of this.products">
+      <a routerLink="/product_types/{{product.productType.productTypeId}}/products/{{product.productId}}">{{product.name}}</a>
+    </div>
+  </nav>
+</div>
