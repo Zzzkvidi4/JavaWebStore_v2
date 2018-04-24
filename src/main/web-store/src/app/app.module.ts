@@ -10,6 +10,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {LoginComponent} from './login/login.component';
 import {FormsModule} from "@angular/forms";
 import {RegistrationComponent} from './registration/registration.component';
+import {ProductTypeComponent} from './product-type/product-type.component';
+import {ProductComponent} from './product/product.component';
+import {ProductListComponent} from './product-list/product-list.component';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import {RegistrationComponent} from './registration/registration.component';
     AppComponent,
     UserComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProductTypeComponent,
+    ProductComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
