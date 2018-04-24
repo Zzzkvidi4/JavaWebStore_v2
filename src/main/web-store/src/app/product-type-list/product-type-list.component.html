@@ -1,0 +1,7 @@
+<div id="product-types-component">
+  <nav>
+    <div *ngFor="let productType of this.productTypes">
+      <a routerLink="/product_types/{{productType.productTypeId}}/products">{{productType.name}}</a>
+    </div>
+  </nav>
+</div>
