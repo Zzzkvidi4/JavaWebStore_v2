@@ -7,5 +7,7 @@ export class Product{
   count: number;
   price: number;
   productType: ProductType;
+  productTypeId: number;
   country: Country;
+  countryId: number;
 }
