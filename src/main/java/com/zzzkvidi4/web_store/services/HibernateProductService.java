@@ -1,7 +1,9 @@
 package com.zzzkvidi4.web_store.services;
 
+import com.zzzkvidi4.web_store.DBHelper;
 import com.zzzkvidi4.web_store.models.Product;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
@@ -10,7 +12,20 @@ import javax.persistence.NoResultException;
 public class HibernateProductService implements ProductService {
     @Override
     public Product findProductById(int id) {
-        return null;
+        try (Session session = DBHelper.getSession()){
+            Transaction transaction = session.beginTransaction();
+            try {
+                Product product = session
+                        .createQuery("from Product where productId = :id", Product.class)
+                        .setParameter("id", id)
+                        .getSingleResult();
+                transaction.commit();
+                return product;
+            } catch (NoResultException e) {
+                transaction.rollback();
+                return null;
+            }
+        }
     }
 
     @Override
