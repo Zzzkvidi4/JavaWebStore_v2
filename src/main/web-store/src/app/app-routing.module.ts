@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: "registration", component: RegistrationComponent },
   { path: "product_types", component: ProductTypeListComponent },
   { path: "product_types/:productTypeId/products", component: ProductListComponent },
-  { path: "product_types/:productTypeId/products/:productId", component: ProductComponent },
+  { path: "products/:productId", component: ProductComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
