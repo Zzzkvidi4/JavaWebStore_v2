@@ -20,6 +20,12 @@ public class Product {
     @Column(name = "price")
     private int price;
 
+    @Column(name = "product_type_id")
+    private int productTypeId;
+
+    @Column(name = "country_id")
+    private int countryId;
+
     @ManyToOne
     @JoinColumn(name = "product_type_id", nullable = false, insertable = false, updatable = false)
     private ProductType productType;
@@ -63,6 +69,38 @@ public class Product {
         this.price = price;
     }
 
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public int getProductTypeId() {
+        return productTypeId;
+    }
+
+    public void setProductTypeId(int productTypeId) {
+        this.productTypeId = productTypeId;
+    }
+
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,21 +121,5 @@ public class Product {
         result = 31 * result + count;
         result = 31 * result + price;
         return result;
-    }
-
-    public ProductType getProductType() {
-        return productType;
-    }
-
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
     }
 }
