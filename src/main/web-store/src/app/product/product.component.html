@@ -1,3 +1,13 @@
-<p>
-  product works!
-</p>
+<div id="product-component" *ngIf="product != null">
+  <div class="product-param-container">
+    <span>Name: {{product.name}}</span>
+  </div>
+
+  <div class="product-param-container">
+    <span>Count: {{product.count}}</span>
+  </div>
+
+  <div class="product-param-container">
+    <span>Price: {{product.price}}</span>
+  </div>
+</div>

@@ -2,6 +2,7 @@ package com.zzzkvidi4.web_store.services;
 
 import com.zzzkvidi4.web_store.DBHelper;
 import com.zzzkvidi4.web_store.models.Product;
+import com.zzzkvidi4.web_store.utils.UnproxyUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class HibernateProductService implements ProductService {
                         .setParameter("id", id)
                         .getSingleResult();
                 transaction.commit();
-                return product;
+                return UnproxyUtils.unproxy(product);
             } catch (NoResultException e) {
                 transaction.rollback();
                 return null;
