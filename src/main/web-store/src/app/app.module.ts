@@ -16,6 +16,7 @@ import {ProductListComponent} from './product-list/product-list.component';
 import {ProductTypeService} from "./services/product-type-service/product-type.service";
 import {ProductTypeListComponent} from './product-type-list/product-type-list.component';
 import {ProductService} from "./services/product-service/product.service";
+import {OrderService} from "./services/order-service/order.service";
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {ProductService} from "./services/product-service/product.service";
   providers: [
     UserService,
     ProductTypeService,
-    ProductService
+    ProductService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProductService} from "../services/product-service/product.service";
+import {OrderService} from "../services/order-service/order.service";
 import {Product} from "../models/product";
 
 @Component({
@@ -10,11 +11,13 @@ import {Product} from "../models/product";
 })
 export class ProductComponent implements OnInit {
 
-  private product: Product = null;
+  product: Product = null;
+  count: number = 1;
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private orderService: OrderService
   ) { }
 
   ngOnInit() {
@@ -30,5 +33,9 @@ export class ProductComponent implements OnInit {
         }
       }
     )
+  }
+
+  addToOrder(){
+
   }
 }
