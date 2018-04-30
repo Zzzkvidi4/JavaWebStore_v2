@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class OrderItem {
     @Id
     @Column(name = "order_item_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderItemId;
 
     @Column(name = "count")
@@ -25,6 +26,14 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false, updatable = false, insertable = false)
     private Order order;
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public int getOrderItemId() {
         return orderItemId;
