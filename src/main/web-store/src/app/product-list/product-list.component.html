@@ -1,4 +1,4 @@
-<div id="product-list-component">
+<div id="product-list-component" *ngIf="this.products != null">
   <nav>
     <div *ngFor="let product of this.products">
       <a routerLink="/products/{{product.productId}}">{{product.name}}</a>

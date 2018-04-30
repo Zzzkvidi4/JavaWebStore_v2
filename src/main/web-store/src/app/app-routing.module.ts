@@ -6,6 +6,8 @@ import {RegistrationComponent} from "./registration/registration.component";
 import {ProductListComponent} from "./product-list/product-list.component";
 import {ProductComponent} from "./product/product.component";
 import {ProductTypeListComponent} from "./product-type-list/product-type-list.component";
+import {OrderListComponent} from "./order-list/order-list.component";
+import {OrderComponent} from "./order/order.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -14,7 +16,9 @@ const routes: Routes = [
   { path: "product_types", component: ProductTypeListComponent },
   { path: "product_types/:productTypeId/products", component: ProductListComponent },
   { path: "products/:productId", component: ProductComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: "orders", component: OrderListComponent },
+  { path: "orders/:orderId", component: OrderComponent },
+  { path: '', redirectTo: '/product_types', pathMatch: 'full' }
 ];
 
 @NgModule({

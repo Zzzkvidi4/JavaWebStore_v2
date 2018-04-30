@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 
 import {AppComponent} from './app.component';
-import {AppRoutingModule} from './/app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 import {UserComponent} from './user/user.component';
 import {UserService} from "./services/user-service/user.service";
 import {HttpClientModule} from "@angular/common/http";
@@ -17,6 +17,8 @@ import {ProductTypeService} from "./services/product-type-service/product-type.s
 import {ProductTypeListComponent} from './product-type-list/product-type-list.component';
 import {ProductService} from "./services/product-service/product.service";
 import {OrderService} from "./services/order-service/order.service";
+import { OrderListComponent } from './order-list/order-list.component';
+import { OrderComponent } from './order/order.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import {OrderService} from "./services/order-service/order.service";
     ProductTypeComponent,
     ProductComponent,
     ProductListComponent,
-    ProductTypeListComponent
+    ProductTypeListComponent,
+    OrderListComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
