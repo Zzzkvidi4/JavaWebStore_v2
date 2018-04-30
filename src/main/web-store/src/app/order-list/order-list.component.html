@@ -1,0 +1,7 @@
+<div id="order-list-component" *ngIf="this.orders != null">
+  <nav>
+    <div *ngFor="let order of this.orders">
+      <a routerLink="/orders/{{order.orderId}}">{{order.orderId}}</a>
+    </div>
+  </nav>
+</div>
