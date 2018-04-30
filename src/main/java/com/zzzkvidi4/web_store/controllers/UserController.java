@@ -3,6 +3,7 @@ package com.zzzkvidi4.web_store.controllers;
 import com.zzzkvidi4.web_store.models.User;
 import com.zzzkvidi4.web_store.responses.JsonHttpResponse;
 import com.zzzkvidi4.web_store.services.UserService;
+import com.zzzkvidi4.web_store.utils.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,7 +26,11 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public JsonHttpResponse<Void> createUser(@RequestBody User user){
         JsonHttpResponse<Void> response = new JsonHttpResponse<>();
-        response.addErrors(userService.createUser(user));
+        if (ValidationUtils.checkUser(user, ValidationUtils.Mode.CREATE, response.getErrors())){
+            response.addErrors(userService.createUser(user));
+        } else {
+            response.setSuccessful(false);
+        }
         return response;
     }
 
