@@ -58,9 +58,9 @@ public class HibernateOrderItemService implements OrderItemService {
                 Product product = item.getProduct();
                 order.setPrice(order.getPrice() - item.getCount() * product.getPrice());
                 product.setCount(product.getCount() + item.getCount());
-                session.delete(item);
-                session.save(product);
                 session.save(order);
+                session.save(product);
+                session.delete(item);
                 transaction.commit();
             }
             catch (NoResultException e) {
