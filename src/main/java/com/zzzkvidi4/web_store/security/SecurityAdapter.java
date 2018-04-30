@@ -24,8 +24,9 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors();
-        http.authorizeRequests().antMatchers("/greeting/**", "/register/**", "/product_types/**").hasAnyRole("ANONYMOUS");
+        http.authorizeRequests().antMatchers("/greeting/**", "/register/**", "/product_types/**").permitAll();
         http.authorizeRequests().antMatchers("/users/**").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/order_items/**").hasAnyRole("USER");
         http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
         http.exceptionHandling().authenticationEntryPoint(new RESTAuthenticationEntryPoint());
         http.formLogin().successHandler(new RESTAuthenticationSuccessHandler());
