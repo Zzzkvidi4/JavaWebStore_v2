@@ -14,7 +14,7 @@ public class OrderItemController {
     @Resource(name = "orderItemService")
     private OrderItemService orderItemService;
 
-    @RequestMapping(value = "/order_item", method = RequestMethod.POST)
+    @RequestMapping(value = "/order_items", method = RequestMethod.POST)
     public JsonHttpResponse<Void> createOrderItem(@RequestBody OrderItem item){
         JsonHttpResponse<Void> response = new JsonHttpResponse<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -22,7 +22,7 @@ public class OrderItemController {
         return response;
     }
 
-    @RequestMapping(value = "/order_item/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/order_items/{id}", method = RequestMethod.DELETE)
     public JsonHttpResponse<Void> deleteOrderItem(@PathVariable("id") int id){
         JsonHttpResponse<Void> response = new JsonHttpResponse<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
