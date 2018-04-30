@@ -11,8 +11,8 @@
     <span>Price: {{product.price}}</span>
   </div>
 
-  <div class="product-buying-component" *ngIf="product != null">
-    <input type="number" [(ngModel)]="number">
-    <input type="button" (click)="addOrderItem"
+  <div class="product-buying-component">
+    <input type="number" [(ngModel)]="count">
+    <input type="button" (click)="addToOrder()">
   </div>
 </div>
