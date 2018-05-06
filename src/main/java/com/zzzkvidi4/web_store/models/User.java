@@ -1,5 +1,7 @@
 package com.zzzkvidi4.web_store.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,9 +29,11 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     @OneToMany(cascade = {CascadeType.REMOVE}, mappedBy = "user")
     private Set<UserRole> userRoles = new HashSet<>();
 
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "user")
     private Set<Order> orders = new HashSet<>();
 

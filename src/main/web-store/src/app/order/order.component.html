@@ -1,0 +1,27 @@
+<div id="order-component" *ngIf="this.order != null">
+  <div>
+    <p>
+      Price: {{this.order.price}}
+    </p>
+  </div>
+
+  <div>
+    <p>
+      Date: {{this.order.date}}
+    </p>
+  </div>
+
+  <div>
+    <p>
+      Items:
+    </p>
+    <div class="order-item" *ngFor="let item of this.order.items">
+      <p>{{item.product.name}} {{item.count}}
+        <input type="button" value="x" (click)="deleteOrderItem(item.orderItemId)">
+      </p>
+    </div>
+  </div>
+  <div>
+    <input type="button" value="Close" (click)="closeOrder()">
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div id="registration-component">
+  <div>
+    <div class="input-component">
+      <label>Name:
+        <input type="text" required [(ngModel)]="user.name">
+      </label>
+    </div>
+
+    <div class="input-component">
+    <label>Surname:
+      <input type="text" required [(ngModel)]="user.surname">
+    </label>
+    </div>
+
+    <div class="input-component">
+      <label>Login:
+        <input type="text" required minlength="4" [(ngModel)]="user.login" #login="ngModel">
+      </label>
+    </div>
+
+    <div class="input-component">
+      <label>Email:
+        <input type="email" required [(ngModel)]="user.email" #email="ngModel">
+      </label>
+    </div>
+
+    <div class="input-component">
+      <label>Password:
+        <input type="text" required [(ngModel)]="user.password"></label>
+    </div>
+
+    <div class="input-component">
+      <label>Password confirmation:
+        <input type="text" required [(ngModel)]="passwordConfirmation">
+      </label>
+    </div>
+
+    <div class="input-component">
+      <input type="button" (click)="register()" value="Register">
+    </div>
+  </div>
+  <app-messages [messages]="messages"></app-messages>
+</div>

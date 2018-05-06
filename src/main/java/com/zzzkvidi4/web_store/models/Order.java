@@ -2,6 +2,7 @@ package com.zzzkvidi4.web_store.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -9,6 +10,7 @@ import java.util.Set;
 public class Order {
     @Id
     @Column(name = "order_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
 
     @Column(name = "date")
@@ -24,7 +26,7 @@ public class Order {
     private int statusId;
 
     @OneToMany(mappedBy = "order")
-    private Set<OrderItem> items;
+    private Set<OrderItem> items = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
@@ -33,6 +35,22 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "status_id", nullable = false, insertable = false, updatable = false)
     private Status status;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public int getOrderId() {
         return orderId;

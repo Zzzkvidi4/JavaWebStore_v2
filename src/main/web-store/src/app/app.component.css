@@ -1,0 +1,14 @@
+.menu-bar{
+  padding: 20px;
+  margin: 0;
+  background-color: beige;
+}
+
+.menu-bar a{
+  text-decoration: none;
+  color: black;
+}
+
+.menu-bar a:hover{
+  background-color: bisque;
+}

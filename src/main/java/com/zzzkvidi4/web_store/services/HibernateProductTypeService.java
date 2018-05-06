@@ -3,13 +3,14 @@ package com.zzzkvidi4.web_store.services;
 import com.zzzkvidi4.web_store.DBHelper;
 import com.zzzkvidi4.web_store.models.Product;
 import com.zzzkvidi4.web_store.models.ProductType;
+import com.zzzkvidi4.web_store.utils.UnproxyUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("productTypeService")
 public class HibernateProductTypeService implements ProductTypeService {
@@ -20,7 +21,7 @@ public class HibernateProductTypeService implements ProductTypeService {
             Transaction transaction = session.beginTransaction();
             List<ProductType> productTypes = session.createQuery("from ProductType", ProductType.class).list();
             transaction.commit();
-            return productTypes;
+            return productTypes.stream().map(UnproxyUtils::unproxy).collect(Collectors.toList());
         }
     }
 
@@ -33,9 +34,7 @@ public class HibernateProductTypeService implements ProductTypeService {
                     .setParameter("productTypeId", productTypeId).getSingleResult();
             Hibernate.initialize(productType.getProducts());
             transaction.commit();
-            List<Product> products = new LinkedList<>();
-            products.addAll(productType.getProducts());
-            return products;
+            return productType.getProducts().stream().map(UnproxyUtils::unproxy).collect(Collectors.toList());
         }
     }
 }
