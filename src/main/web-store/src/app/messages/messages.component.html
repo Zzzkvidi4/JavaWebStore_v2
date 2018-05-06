@@ -1,3 +1,5 @@
-<p>
-  messages works!
-</p>
+<div id="messages-component" *ngIf="messages != null">
+  <div *ngFor="let message of messages">
+    <p class="error">{{message}}</p>
+  </div>
+</div>
