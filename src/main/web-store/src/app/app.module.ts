@@ -17,8 +17,9 @@ import {ProductTypeService} from "./services/product-type-service/product-type.s
 import {ProductTypeListComponent} from './product-type-list/product-type-list.component';
 import {ProductService} from "./services/product-service/product.service";
 import {OrderService} from "./services/order-service/order.service";
-import { OrderListComponent } from './order-list/order-list.component';
-import { OrderComponent } from './order/order.component';
+import {OrderListComponent} from './order-list/order-list.component';
+import {OrderComponent} from './order/order.component';
+import {MessagesComponent} from './messages/messages.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { OrderComponent } from './order/order.component';
     ProductListComponent,
     ProductTypeListComponent,
     OrderListComponent,
-    OrderComponent
+    OrderComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
