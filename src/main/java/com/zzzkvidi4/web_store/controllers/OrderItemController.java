@@ -18,7 +18,11 @@ public class OrderItemController {
     public JsonHttpResponse<Void> createOrderItem(@RequestBody OrderItem item){
         JsonHttpResponse<Void> response = new JsonHttpResponse<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        response.addErrors(orderItemService.createOrderItem(item, auth.getName()));
+        if (item.getCount() <= 0) {
+            response.addError("You can't order zero or negative number of items!");
+        } else {
+            response.addErrors(orderItemService.createOrderItem(item, auth.getName()));
+        }
         return response;
     }
 
