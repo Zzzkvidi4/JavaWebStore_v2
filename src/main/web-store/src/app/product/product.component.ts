@@ -15,6 +15,7 @@ export class ProductComponent implements OnInit {
   product: Product = null;
   count: number = 1;
   productId: number;
+  messages: string[];
 
   constructor(
     private route: ActivatedRoute,
@@ -39,16 +40,28 @@ export class ProductComponent implements OnInit {
   }
 
   addToOrder(){
-    let item = new OrderItem();
-    item.productId = this.productId;
-    item.count = this.count;
-    let tmp = this.orderService.createOrderItem(item);
-    tmp.subscribe(resp => {
-      this.router.navigate(["/product_types"]);
-    }, error => {
-      if (error.status == 401) {
-        this.router.navigate(["/login"]);
-      }
-    });
+    if (this.isCountValid()) {
+      let item = new OrderItem();
+      item.productId = this.productId;
+      item.count = this.count;
+      let tmp = this.orderService.createOrderItem(item);
+      tmp.subscribe(resp => {
+        if (resp.body.errors.length == 0) {
+          this.router.navigate(["/product_types"]);
+        } else {
+          this.messages = resp.body.errors;
+        }
+      }, error => {
+        if (error.status == 401) {
+          this.router.navigate(["/login"]);
+        }
+      });
+    } else {
+      this.messages = ["Product count should be between 1 and " + this.product.count + "!"]
+    }
+  }
+
+  isCountValid(){
+    return ((this.count > 0) && (this.count <= this.product.count));
   }
 }
