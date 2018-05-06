@@ -3,60 +3,35 @@
     <div class="input-component">
       <label>Name:
         <input type="text" required [(ngModel)]="user.name">
-        <span *ngIf="user.name.length == 0">*</span>
       </label>
     </div>
 
     <div class="input-component">
     <label>Surname:
       <input type="text" required [(ngModel)]="user.surname">
-      <span *ngIf="user.surname.length == 0">*</span>
     </label>
     </div>
 
     <div class="input-component">
       <label>Login:
         <input type="text" required minlength="4" [(ngModel)]="user.login" #login="ngModel">
-        <div *ngIf="login.invalid && (login.dirty || login.touched)"
-             class="alert alert-danger">
-
-          <div *ngIf="login.errors.required">
-            Name is required.
-          </div>
-          <div *ngIf="login.errors.minlength">
-            Name must be at least 4 characters long.
-          </div>
-        </div>
       </label>
     </div>
 
     <div class="input-component">
       <label>Email:
         <input type="email" required [(ngModel)]="user.email" #email="ngModel">
-        <div *ngIf="email.invalid && (email.dirty || email.touched)"
-             class="alert alert-danger">
-
-          <div *ngIf="email.errors.required">
-            Name is required.
-          </div>
-
-          <div *ngIf="email.errors.email">
-            Name must be at least 4 characters long.
-          </div>
-        </div>
       </label>
     </div>
 
     <div class="input-component">
       <label>Password:
-        <input type="text" required [(ngModel)]="user.password">
-        <span *ngIf="user.password.length == 0">*</span>
-      </label>
+        <input type="text" required [(ngModel)]="user.password"></label>
     </div>
 
     <div class="input-component">
       <label>Password confirmation:
-        <input type="text" required>
+        <input type="text" required [(ngModel)]="passwordConfirmation">
       </label>
     </div>
 
@@ -64,4 +39,5 @@
       <input type="button" (click)="register()" value="Register">
     </div>
   </div>
+  <app-messages [messages]="messages"></app-messages>
 </div>
